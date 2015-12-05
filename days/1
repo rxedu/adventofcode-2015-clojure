@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+input = File.read('input/1.txt')
+
+floor = input.count('(') - input.count(')')
+
+File.write('output/1.txt', floor)
+puts floor

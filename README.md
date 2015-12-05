@@ -4,6 +4,8 @@
 
 ## Build Environment
 
+- Ruby 2.2.3
+
 ## Usage
 
 Generate all solutions with
