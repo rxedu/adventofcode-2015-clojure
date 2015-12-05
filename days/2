@@ -1,0 +1,15 @@
+#!/usr/bin/env ruby
+
+input = File.readlines('input/2.txt').map do |line|
+  line.split('x').map(&:to_i)
+end
+
+paper = input.map do |dim|
+  x, y, z = dim.sort
+  2 * (x * y + x * z + y * z) + x * y
+end
+
+total = paper.reduce(:+)
+
+File.write('output/2.txt', total)
+puts total
