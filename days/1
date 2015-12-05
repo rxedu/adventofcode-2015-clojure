@@ -1,8 +1,28 @@
 #!/usr/bin/env ruby
 
+output = File.open('output/1.txt', 'w')
+
 input = File.read('input/1.txt')
 
 floor = input.count('(') - input.count(')')
 
-File.write('output/1.txt', floor)
+output.write(floor)
 puts floor
+
+pos = 0
+num = 0
+input.chars.each do |move|
+  num += 1
+  case move
+  when '('
+    pos += 1
+  when ')'
+    pos += -1
+  end
+  break if pos == -1
+end
+
+output.write("\n#{num}")
+puts num
+
+output.close
