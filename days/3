@@ -2,6 +2,8 @@
 
 require 'set'
 
+output = File.open('output/3.txt', 'w')
+
 input = File.read('input/3.txt')
 
 class Sled
@@ -53,5 +55,36 @@ end
 
 total = houses.count
 
-File.write('output/3.txt', total)
+output.write(total)
 puts total
+
+santasled = Sled.new
+robosled = Sled.new
+houses = Set.new
+houses << santasled.location
+houses << robosled.location
+
+input.chars.each_with_index do |move, idx|
+  sled = santasled if idx.even?
+  sled = robosled if idx.odd?
+
+  case move
+  when '>'
+    sled.right
+  when '<'
+    sled.left
+  when '^'
+    sled.up
+  when 'v'
+    sled.down
+  end
+
+  houses << sled.location
+end
+
+total = houses.count
+
+output.write(total)
+puts total
+
+output.close
