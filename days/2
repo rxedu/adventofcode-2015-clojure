@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+output = File.open('output/2.txt', 'w')
+
 input = File.readlines('input/2.txt').map do |line|
   line.split('x').map(&:to_i)
 end
@@ -11,5 +13,17 @@ end
 
 total = paper.reduce(:+)
 
-File.write('output/2.txt', total)
+output.write(total)
 puts total
+
+ribbon = input.map do |dim|
+  x, y, z = dim.sort
+  2 * (x + y) + x * y * z
+end
+
+total = ribbon.reduce(:+)
+
+output.write("\n#{total}")
+puts total
+
+output.close
