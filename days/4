@@ -16,4 +16,14 @@ end
 output.write(num - 1)
 puts num - 1
 
+digest = ''
+num = 0
+until digest =~ /^000000[^0]/
+  digest = Digest::MD5.hexdigest "#{input.strip}#{num}"
+  num += 1
+end
+
+output.write(num - 1)
+puts num - 1
+
 output.close
