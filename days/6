@@ -43,9 +43,44 @@ input.each do |cmd|
   end
 end
 
-total = grid.flatten.map{ |l| l.power}.count(true)
+total = grid.flatten.map{|l| l.power}.count(true)
 
 output.write(total)
+puts total
+
+class BrightLight
+  attr_accessor :power
+
+  def initialize
+    self.power = 0
+  end
+
+  def turnon
+    self.power += 1
+  end
+
+  def turnoff
+    self.power = [0, self.power - 1].max
+  end
+
+  def toggle
+    self.power += 2
+  end
+end
+
+grid = Array.new(1000) { Array.new(1000) { BrightLight.new } }
+
+input.each do |cmd|
+  cmd[1].each do |row|
+    cmd[2].each do |col|
+      grid[row][col].send(cmd.first)
+    end
+  end
+end
+
+total = grid.flatten.map{|l| l.power}.reduce(:+)
+
+output.write("\n#{total}")
 puts total
 
 output.close
