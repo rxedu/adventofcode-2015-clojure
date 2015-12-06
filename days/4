@@ -1,0 +1,19 @@
+#!/usr/bin/env ruby
+
+require 'digest'
+
+output = File.open('output/4.txt', 'w')
+
+input = File.read('input/4.txt')
+
+digest = ''
+num = 0
+until digest =~ /^00000[^0]/
+  digest = Digest::MD5.hexdigest "#{input.strip}#{num}"
+  num += 1
+end
+
+output.write(num - 1)
+puts num - 1
+
+output.close
