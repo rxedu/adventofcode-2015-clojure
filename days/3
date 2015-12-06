@@ -84,7 +84,7 @@ end
 
 total = houses.count
 
-output.write(total)
+output.write("\n#{total}")
 puts total
 
 output.close

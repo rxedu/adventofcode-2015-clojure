@@ -23,7 +23,7 @@ until digest =~ /^000000[^0]/
   num += 1
 end
 
-output.write(num - 1)
+output.write("\n#{num - 1}")
 puts num - 1
 
 output.close
