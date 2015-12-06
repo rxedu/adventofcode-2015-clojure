@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+output = File.open('output/5.txt', 'w')
+
+input = File.read('input/5.txt')
+
+vowels = %w(a e i o u)
+
+total = 0
+input.each_line do |s|
+  next if s =~ /(ab|cd|pq|xy)/
+  next unless s =~ /([a-z])\1/
+
+  num_vowels = 0
+  vowels.each do |v|
+    num_vowels += s.count(v)
+  end
+  next unless num_vowels >= 3
+
+  total += 1
+end
+
+output.write("\n#{total}")
+puts total
+
+output.close
