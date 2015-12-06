@@ -20,6 +20,16 @@ input.each_line do |s|
   total += 1
 end
 
+output.write(total)
+puts total
+
+total = 0
+input.each_line do |s|
+  next unless s =~ /([a-z])[a-z]\1/
+  next unless (s =~ /([a-z]{2})\1/ || s =~ /([a-z]{2})[a-z]+\1/)
+  total += 1
+end
+
 output.write("\n#{total}")
 puts total
 
