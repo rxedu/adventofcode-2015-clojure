@@ -24,4 +24,5 @@
   [input]
   (let [elements (positive-numbers)
         salt (clojure.string/trim-newline input)]
-    [(zero-salted-hash-search elements salt 5)]))
+    [(zero-salted-hash-search elements salt 5)
+     (zero-salted-hash-search elements salt 6)]))
