@@ -10,8 +10,7 @@
 (defn paren-to-int
   "Converts ( to 1, ) to -1, and anything else to zero."
   [paren]
-  (if (= paren "(") 1
-      (if (= paren ")") -1 0)))
+  (case paren "(" 1 ")" -1 0))
 
 (defn steps-to-basement
   "Finds the first step that takes Santa to the basement."
