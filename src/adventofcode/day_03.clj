@@ -23,8 +23,12 @@
   (last (reduce #(let [next-house (map + (first %1) %2)]
                    [next-house (conj (last %1) next-house)])
                 [[0 0] #{[0 0]}] moves)))
-
 (defn solve
   "Given the input for the day, returns the solution."
   [input]
-  [((comp count track-houses moves-to-seq) input)])
+  (let [moves (moves-to-seq input)]
+    [((comp count track-houses) moves)
+     ((comp count set)
+      (apply concat (map track-houses
+                         [(take-nth 2 moves)
+                          (take-nth 2 (rest moves))])))]))
