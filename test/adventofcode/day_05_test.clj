@@ -8,3 +8,9 @@
   (is (false? (nice? "jchzalrnumimnmhp")))
   (is (false? (nice? "haegwjzuvuyypxyu")))
   (is (false? (nice? "dvszwmarrgswjxmb"))))
+
+(deftest really-nice?-test
+  (is (true?  (really-nice? "qjhvhtzxzqqjkmpb")))
+  (is (true?  (really-nice? "xxyxx")))
+  (is (false? (really-nice? "uurcxstgmygtbstg")))
+  (is (false? (really-nice? "ieodomkazucvgmuy"))))
