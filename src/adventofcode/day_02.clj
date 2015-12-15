@@ -2,7 +2,7 @@
 
 (defn parse-dimensions
   "Converts a input string of the form 4x2x6
-  to a vector [4 2 6]"
+  to a vector [4 2 6]."
   [input-string]
   (map #(Integer. %) (clojure.string/split input-string #"x")))
 
