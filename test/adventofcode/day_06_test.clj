@@ -2,13 +2,13 @@
   (:require [clojure.test :refer :all]
             [adventofcode.day-06 :refer :all]))
 
-(deftest string-to-instruction-test
+(deftest parse-instruction-test
   (is (= [:on [0 999] [0 999]]
-         (string-to-instruction "turn on 0,0 through 999,999")))
+         (parse-instruction "turn on 0,0 through 999,999")))
   (is (= [:toggle [0 999] [0 0]]
-         (string-to-instruction "toggle 0,0 through 999,0")))
+         (parse-instruction "toggle 0,0 through 999,0")))
   (is (= [:off [499 500] [499 500]]
-         (string-to-instruction "turn off 499,499 through 500,500"))))
+         (parse-instruction "turn off 499,499 through 500,500"))))
 
 (deftest init-grid-test
   (is (= [[false false] [false false]]

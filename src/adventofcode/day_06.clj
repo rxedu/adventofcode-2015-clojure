@@ -6,7 +6,7 @@
 (def bright-actions
   {:on #(+ % 1) :off #(max 0 (- % 1)) :toggle #(+ % 2)})
 
-(defn string-to-instruction
+(defn parse-instruction
   "Converts an instruction from a string to a vector,
   e.g., turn on 0,5 through 2,10 becomes [:on [0 2] [5 10]]."
   [string]
@@ -50,7 +50,7 @@
 (defn solve
   "Given the input for the day, returns the solution."
   [input]
-  (let [instructions (map string-to-instruction
+  (let [instructions (map parse-instruction
                           (clojure.string/split-lines input))]
     [((comp #(get % true) frequencies flatten)
       (reduce #(modify-grid %1 %2 actions)
