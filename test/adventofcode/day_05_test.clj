@@ -14,3 +14,11 @@
   (is (true?  (really-nice? "xxyxx")))
   (is (false? (really-nice? "uurcxstgmygtbstg")))
   (is (false? (really-nice? "ieodomkazucvgmuy"))))
+
+(deftest solve-test
+  (testing "part 1"
+    (is (= 2 (first (solve
+                     "ugknbfddgicrmopn\ndvszwmarrgswjxmb\naaa")))))
+  (testing "part 2"
+    (is (= 2 (second (solve
+                      "qjhvhtzxzqqjkmpb\nuurcxstgmygtbstg\nxxyxx"))))))
