@@ -1,21 +1,17 @@
 (ns adventofcode.day-03)
 
-(defn move-to-vector
-  "Converts a move (><^v) to a vector that represents the move,
-  e.g., > becomes [1 0] and v becomes [0 -1].
-  Anything else is converted to [0 0]."
-  [move]
-  (case move
-    ">" [1 0]
-    "<" [-1 0]
-    "^" [0 1]
-    "v" [0 -1]
-    [0 0]))
+(def move-strings
+  {">" [1 0]
+   "<" [-1 0]
+   "^" [0 1]
+   "v" [0 -1]})
 
-(defn moves-to-seq
-  "Converts a string of moves to a seq of vectors using move-to-vector."
+(defn parse-moves
+  "Converts a string of moves to a seq of vectors
+  according to move-strings, e.g.,
+  >^V< becomes [[1 0], [0 1], [0 -1], [-1 0]]."
   [moves]
-  (map (comp move-to-vector str) (seq moves)))
+  (replace move-strings (map str (seq moves))))
 
 (defn track-houses
   "Given a seq of moves as vectors, returns a set of all visited houses."
@@ -26,7 +22,7 @@
 (defn solve
   "Given the input for the day, returns the solution."
   [input]
-  (let [moves (moves-to-seq input)]
+  (let [moves ((comp parse-moves clojure.string/trim-newline) input)]
     [((comp count track-houses) moves)
      ((comp count set)
       (apply concat (map track-houses
