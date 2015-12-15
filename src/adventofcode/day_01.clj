@@ -1,9 +1,14 @@
 (ns adventofcode.day-01)
 
+(def direction-strings
+  {"("  1
+   ")" -1})
+
 (defn parse-directions
-  "Converts a string of parentheses into a seq of 1 and -1."
+  "Converts a string of parentheses into a seq of 1 and -1
+  according to direction-strings."
   [directions]
-  (replace {"(" 1 ")" -1} (map str (seq directions))))
+  (replace direction-strings (map str (seq directions))))
 
 (defn final-floor
   "Given a string of directions, finds the floor Santa ends on."
