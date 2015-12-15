@@ -2,8 +2,8 @@
   (:require [clojure.test :refer :all]
             [adventofcode.day-02 :refer :all]))
 
-(deftest input-to-dimensions-test
-  (is (= [4 2 6] (input-to-dimensions "4x2x6"))))
+(deftest parse-dimensions-test
+  (is (= [4 2 6] (parse-dimensions "4x2x6"))))
 
 (deftest paper-test
   (is (= 58 (paper [2 3 4])))

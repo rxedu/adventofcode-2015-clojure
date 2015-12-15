@@ -1,6 +1,6 @@
 (ns adventofcode.day-01)
 
-(defn get-directions
+(defn parse-directions
   "Converts a string of parentheses into a seq of 1 and -1."
   [directions]
   (replace {"(" 1 ")" -1} (map str (seq directions))))
@@ -8,7 +8,7 @@
 (defn final-floor
   "Given a string of directions, finds the floor Santa ends on."
   [directions]
-  (reduce + (get-directions directions)))
+  (reduce + (parse-directions directions)))
 
 (defn steps-to-basement
   "Finds the first step that takes Santa to the basement."
@@ -16,7 +16,7 @@
   (count (take-while (complement nil?)
                      (reductions
                       #(if (= %1 -1) (reduced nil) (+ %1 %2))
-                      (get-directions directions)))))
+                      (parse-directions directions)))))
 
 (defn solve
   "Given the input for the day, returns the solution."

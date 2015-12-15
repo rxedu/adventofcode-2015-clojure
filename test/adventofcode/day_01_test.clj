@@ -2,8 +2,8 @@
   (:require [clojure.test :refer :all]
             [adventofcode.day-01 :refer :all]))
 
-(deftest get-directions-test
-  (is (=  [1 -1 1 1 1 -1] (get-directions "()((()"))))
+(deftest parse-directions-test
+  (is (=  [1 -1 1 1 1 -1] (parse-directions "()((()"))))
 
 (deftest final-floor-test
   (is (=  0 (final-floor "(())")))

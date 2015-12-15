@@ -1,6 +1,6 @@
 (ns adventofcode.day-02)
 
-(defn input-to-dimensions
+(defn parse-dimensions
   "Converts a input string of the form 4x2x6
   to a vector [4 2 6]"
   [input-string]
@@ -22,6 +22,6 @@
   "Given the input for the day, returns the solution."
   [input]
   (let [all-dimensions
-        (map input-to-dimensions (clojure.string/split-lines input))]
+        (map parse-dimensions (clojure.string/split-lines input))]
     [(reduce + (map paper all-dimensions))
      (reduce + (map ribbon all-dimensions))]))
