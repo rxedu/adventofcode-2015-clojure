@@ -21,4 +21,4 @@
   (testing "part 1"
     (is (= 101 (first (solve "4x2x3\n1x1x10")))))
   (testing "part 2"
-    (is (= 48 (first (solve "4x2x3\n1x1x10"))))))
+    (is (= 48 (second (solve "4x2x3\n1x1x10"))))))
