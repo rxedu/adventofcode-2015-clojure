@@ -1,10 +1,14 @@
 (ns adventofcode.day-06)
 
 (def actions
-  {:on (constantly true) :off (constantly false) :toggle #(not %)})
+  {:on (constantly true)
+   :off (constantly false)
+   :toggle #(not %)})
 
 (def bright-actions
-  {:on #(+ % 1) :off #(max 0 (- % 1)) :toggle #(+ % 2)})
+  {:on #(+ % 1)
+   :off #(max 0 (- % 1))
+   :toggle #(+ % 2)})
 
 (defn parse-instruction
   "Converts an instruction from a string to a vector,
@@ -19,13 +23,14 @@
     [command (take-nth 2 lights) (take-nth 2 (rest lights))]))
 
 (defn init-grid
-  "Returns a lazy n-by-n grid where every element is a the given constant."
+  "Returns a lazy n-by-n grid
+  where the value of every element is the given constant."
   [n constant]
   (repeat n (repeat n constant)))
 
 (defn form-grid
-  "Returns an n-by-n grid where the state of the light at position [x y]
-  is determined by the value of the state function on that location."
+  "Returns an n-by-n grid where the value at position [x y]
+  is determined by the value of the state function on that position."
   [n state-fn]
   (let [grid-size (range n)]
     (reduce
@@ -35,7 +40,7 @@
      [] grid-size)))
 
 (defn modify-grid
-  "Applies an instruction to a grid of lights and returns the modified grid."
+  "Applies an instruction to a grid and returns the modified grid."
   [grid instruction actions]
   (let [action ((first instruction) actions)
         [xr yr] (rest instruction)]
