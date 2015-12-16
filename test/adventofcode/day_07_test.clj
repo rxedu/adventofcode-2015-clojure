@@ -31,6 +31,10 @@
     (is (= {:x 3 :y 5 :z -4}       (connect wires [:not {:z [:x]}])))
     (is (= {:x 3 :y 5 :z 6 :a 320} (connect wires [:lsh {:a [:y :z]}])))))
 
+(deftest override-wire-test
+  (is (= [[:sig {:x [100]}] [:not {:y [:x]}]]
+         (override-wire [[:sig {:x [42]}] [:not {:y [:x]}]] :x 100))))
+
 (deftest solve-circuit-test
   (let [simple-connections
         (map parse-connection

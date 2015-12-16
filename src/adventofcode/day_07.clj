@@ -65,6 +65,13 @@
             input-vals (map #(if (keyword? %) (% wires) %) inputs)]
         (assoc wires output (apply gate input-vals)))))
 
+(defn override-wire
+  "Removes any inputs to the given wire from connections
+  and adds a connection for that wire with the specified input."
+  [connections wire input]
+  (cons [:sig (assoc {} wire [input])]
+        (remove (comp some? wire second) connections)))
+
 (defn solve-circuit
   "Given a seq of connections, returns the stable values of all wires."
   ([connections]
@@ -78,5 +85,7 @@
 (defn solve
   "Given the input for the day, returns the solution."
   [input]
-  (let [connections (map parse-connection (clojure.string/split-lines input))]
-    [(:a (solve-circuit connections))]))
+  (let [connections (map parse-connection (clojure.string/split-lines input))
+        a-signal (:a (solve-circuit connections))]
+    [a-signal
+     (:a (solve-circuit (override-wire connections :b a-signal)))]))
