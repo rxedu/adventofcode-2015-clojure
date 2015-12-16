@@ -36,5 +36,6 @@
   [input]
   (let [connections
         (into {} (map parse-connection
-                      (clojure.string/split-lines input)))]
-    [((comp min distances) connections)]))
+                      (clojure.string/split-lines input)))
+        all-distances (distances connections)]
+    [(apply min all-distances) (apply max all-distances)]))
