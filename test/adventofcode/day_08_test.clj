@@ -19,3 +19,9 @@
   (is (= 5  (in-memory-characters "\"\\\"\\\\z9\\x27\"")))
   (is (= 30 (in-memory-characters
              "\"\\\"vhzlbwq\\\"xeimjt\\\\xe\\x85umho\\\"m\\\"\\\"bmy\""))))
+
+(deftest encoded-characters-test
+  (is (= 6  (encoded-characters "\"\"")))
+  (is (= 9  (encoded-characters "\"abc\"")))
+  (is (= 16 (encoded-characters "\"aaa\\\"aaa\"")))
+  (is (= 11 (encoded-characters "\"\\x27\""))))
