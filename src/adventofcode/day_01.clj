@@ -13,7 +13,7 @@
 (defn steps-to-basement
   "Finds the first step that takes Santa to the basement."
   [directions]
-  (count (take-while (complement nil?)
+  (count (take-while some?
                      (reductions
                       #(if (= %1 -1) (reduced nil) (+ %1 %2))
                       directions))))
