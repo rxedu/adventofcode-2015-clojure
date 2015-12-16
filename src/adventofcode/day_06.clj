@@ -6,8 +6,8 @@
    :toggle #(not %)})
 
 (def brightness-actions
-  {:on #(+ % 1)
-   :off #(max 0 (- % 1))
+  {:on inc
+   :off #(max 0 (dec %))
    :toggle #(+ % 2)})
 
 (defn parse-instruction
