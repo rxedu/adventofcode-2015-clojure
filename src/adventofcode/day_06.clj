@@ -5,7 +5,7 @@
    :off (constantly false)
    :toggle #(not %)})
 
-(def bright-actions
+(def brightness-actions
   {:on #(+ % 1)
    :off #(max 0 (- % 1))
    :toggle #(+ % 2)})
@@ -52,14 +52,22 @@
                   (<= (first yr) y (last yr)))
            (action light) light))))))
 
+(defn lit-lights
+  "Counts the total number of lit lights on a grid."
+  [grid]
+  (or ((comp #(get % true) frequencies flatten) grid) 0))
+
+(defn brightness
+  "Returns the total brightness of all lights on a grid."
+  [grid]
+  (reduce + (flatten grid)))
+
 (defn solve
   "Given the input for the day, returns the solution."
   [input]
-  (let [instructions (map parse-instruction
-                          (clojure.string/split-lines input))]
-    [((comp #(get % true) frequencies flatten)
-      (reduce #(modify-grid %1 %2 actions)
-              (init-grid 1000 false) instructions))
-     (reduce + (flatten
-                (reduce #(modify-grid %1 %2 bright-actions)
-                        (init-grid 1000 0) instructions)))]))
+  (let [instructions
+        (map parse-instruction (clojure.string/split-lines input))]
+    [(lit-lights
+      (modify-grid (init-grid 1000 false) actions instructions))
+     (brightness
+      (modify-grid (init-grid 1000 0) brightness-actions instructions))]))

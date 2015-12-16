@@ -38,3 +38,13 @@
             [false false false]
             [false false false]]
            (modify-grid grid [:toggle [0 0] [0 2]] actions)))))
+
+(deftest lit-lights-test
+  (is (= 0 (lit-lights [[false false] [false false]])))
+  (is (= 3 (lit-lights [[true  false] [true  true]])))
+  (is (= 2 (lit-lights [[true  true]  [false false]]))))
+
+(deftest brightness-test
+  (is (= 0  (brightness [[0 0] [0 0]])))
+  (is (= 11 (brightness [[2 5] [1 3]])))
+  (is (= 4  (brightness [[0 0] [4 0]]))))
