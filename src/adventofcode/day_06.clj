@@ -33,11 +33,12 @@
   is determined by the value of the state function on that position."
   [n state-fn]
   (let [grid-size (range n)]
-    (reduce
-     (fn [row x] (conj row (reduce
-                            (fn [column y] (conj column (state-fn [x y])))
-                            [] grid-size)))
-     [] grid-size)))
+    (persistent!
+     (reduce
+      (fn [row x] (conj! row (persistent! (reduce
+                                           (fn [column y] (conj! column (state-fn [x y])))
+                                           (transient []) grid-size))))
+      (transient []) grid-size))))
 
 (defn transform-grid
   "Applies an instruction to a grid and returns the modified grid."
