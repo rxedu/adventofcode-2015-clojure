@@ -39,9 +39,9 @@
                             [] grid-size)))
      [] grid-size)))
 
-(defn modify-grid
+(defn transform-grid
   "Applies an instruction to a grid and returns the modified grid."
-  [grid instruction actions]
+  [actions grid instruction]
   (let [action ((first instruction) actions)
         [xr yr] (rest instruction)]
     (form-grid
@@ -68,6 +68,8 @@
   (let [instructions
         (map parse-instruction (clojure.string/split-lines input))]
     [(lit-lights
-      (modify-grid (init-grid 1000 false) actions instructions))
+      (reduce (partial transform-grid actions)
+              (init-grid 1000 false) instructions))
      (brightness
-      (modify-grid (init-grid 1000 0) brightness-actions instructions))]))
+      (reduce (partial transform-grid brightness-actions)
+              (init-grid 1000 0) instructions))]))

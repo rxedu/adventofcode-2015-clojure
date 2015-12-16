@@ -28,16 +28,16 @@
           [false false false]]
          (form-grid 3 (fn [[x y]] (if (and (= x 1) (= y 2)) true false))))))
 
-(deftest modify-grid-test
+(deftest transform-grid-test
   (let [grid (init-grid 3 false)]
     (is (= [[true  false false]
             [true  false false]
             [false false false]]
-           (modify-grid grid [:on [0 1] [0 0]] actions)))
+           (transform-grid actions grid [:on [0 1] [0 0]])))
     (is (= [[true  true  true]
             [false false false]
             [false false false]]
-           (modify-grid grid [:toggle [0 0] [0 2]] actions)))))
+           (transform-grid actions grid [:toggle [0 0] [0 2]])))))
 
 (deftest lit-lights-test
   (is (= 0 (lit-lights [[false false] [false false]])))
