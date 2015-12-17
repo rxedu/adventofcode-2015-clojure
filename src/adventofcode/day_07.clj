@@ -1,31 +1,31 @@
 (ns adventofcode.day-07)
 
 (def matchers
-  {:sig #"(\d+) -> (\w+)"
-   :con #"(\w+) -> (\w+)"
+  {:sig #"(\w+) -> (\w+)"
    :not #"NOT (\w+) -> (\w+)"
    :and #"(\w+) AND (\w+) -> (\w+)"
-   :1nd #"1 AND (\w+) -> (\w+)"
    :or  #"(\w+) OR (\w+) -> (\w+)"
-   :lsh #"(\w+) LSHIFT (\d+) -> (\w+)"
-   :rsh #"(\w+) RSHIFT (\d+) -> (\w+)"})
+   :lsh #"(\w+) LSHIFT (\w+) -> (\w+)"
+   :rsh #"(\w+) RSHIFT (\w+) -> (\w+)"})
 
 (def elements
-  {:sig #(hash-map (keyword %2) (vector (Integer. %1)))
-   :con #(hash-map (keyword %2) (vector (keyword %1)))
-   :not #(hash-map (keyword %2) (vector (keyword %1)))
-   :and #(hash-map (keyword %3) (vector (keyword %1) (keyword %2)))
-   :1nd #(hash-map (keyword %2) (vector 1 (keyword %1)))
-   :or  #(hash-map (keyword %3) (vector (keyword %1) (keyword %2)))
-   :lsh #(hash-map (keyword %3) (vector (keyword %1) (Integer. %2)))
-   :rsh #(hash-map (keyword %3) (vector (keyword %1) (Integer. %2)))})
+  (let [convert
+        #(if (re-find #"\d+" %) (Integer. %) (keyword %))
+        single-input
+        #(hash-map (keyword %2) (vector (convert %1)))
+        double-input
+        #(hash-map (keyword %3) (vector (convert %1) (convert %2)))]
+    {:sig single-input
+     :not single-input
+     :and double-input
+     :or  double-input
+     :lsh double-input
+     :rsh double-input}))
 
 (def gates
   {:sig identity
-   :con identity
    :not bit-not
    :and bit-and
-   :1nd bit-and
    :or  bit-or
    :lsh bit-shift-left
    :rsh bit-shift-right})

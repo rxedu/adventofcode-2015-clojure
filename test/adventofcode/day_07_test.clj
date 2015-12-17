@@ -4,7 +4,7 @@
 
 (deftest parse-connection-test
   (is (= [:sig {:xy [42]}]   (parse-connection "42 -> xy")))
-  (is (= [:con {:xx [:zz]}]  (parse-connection "zz -> xx")))
+  (is (= [:sig {:xx [:zz]}]  (parse-connection "zz -> xx")))
   (is (= [:not {:zz [:xx]}]  (parse-connection "NOT xx -> zz")))
   (is (= [:and {:z [:x :y]}] (parse-connection "x AND y -> z")))
   (is (= [:or  {:z [:x :y]}] (parse-connection "x OR y -> z")))
@@ -15,6 +15,7 @@
   (is (= []       (connection-inputs [:sig {:xy [42]}])))
   (is (= [:xx]    (connection-inputs [:not {:zz [:xx]}])))
   (is (= [:x :yy] (connection-inputs [:and {:z [:x :yy]}])))
+  (is (= [:x]     (connection-inputs [:and {:z [:x 2]}])))
   (is (= [:x]     (connection-inputs [:rsh {:z [:x 5]}]))))
 
 (deftest missing-inputs?-test
@@ -28,6 +29,7 @@
     (is (= {:x 3 :y 5 :z 42}       (connect wires [:sig {:z [42]}])))
     (is (= {:x 3 :y 5 :z 6 :a 42}  (connect wires [:sig {:a [42]}])))
     (is (= {:x 3 :y 5 :z 1}        (connect wires [:and {:z [:x :y]}])))
+    (is (= {:x 3 :y 5 :z 7}        (connect wires [:or  {:z [2 :y]}])))
     (is (= {:x 3 :y 5 :z -4}       (connect wires [:not {:z [:x]}])))
     (is (= {:x 3 :y 5 :z 6 :a 320} (connect wires [:lsh {:a [:y :z]}])))))
 
