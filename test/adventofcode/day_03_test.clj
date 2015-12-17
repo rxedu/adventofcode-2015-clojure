@@ -3,9 +3,9 @@
             [adventofcode.day-03 :refer :all]))
 
 (deftest parse-moves-test
-  (is (= '([1 0] [-1 0] [0 1] [0 -1])
+  (is (= [[1 0] [-1 0] [0 1] [0 -1]]
          (parse-moves "><^v")))
-  (is (= '([0 1] [0 1] [1 0] [1 0])
+  (is (= [[0 1] [0 1] [1 0] [1 0]]
          (parse-moves "^^>>"))))
 
 (deftest track-houses-test
