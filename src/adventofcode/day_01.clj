@@ -7,8 +7,8 @@
 (defn parse-directions
   "Converts a string of parentheses into a seq of 1 and -1
   according to direction-strings."
-  [directions]
-  (replace direction-strings (map str (seq directions))))
+  [string]
+  (replace direction-strings (map str (seq string))))
 
 (defn steps-to-basement
   "Finds the first step that takes Santa to the basement."
