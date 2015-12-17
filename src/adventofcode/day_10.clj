@@ -15,5 +15,7 @@
 (defn solve
   "Given the input for the day, returns the solution."
   [input]
-  (let [n (Integer. (clojure.string/trim-newline input))]
-    [((comp count last) (take 41 (look-and-say n)))]))
+  (let [n (Integer. (clojure.string/trim-newline input))
+        count-last #((comp count last) (take % (look-and-say n)))]
+    [(count-last 41)
+     (count-last 51)]))
