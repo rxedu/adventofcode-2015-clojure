@@ -56,7 +56,8 @@
       (recur (conj digits (first alph))))))
 
 (defn inc-password
-  "Returns the next valid password."
+  "Returns the input string if it's a valid password,
+  otherwise returns the next valid password."
   [password]
   (loop [string password]
     (if (valid-password? string)
