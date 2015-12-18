@@ -17,7 +17,7 @@
              matchers)))
 
 (defn remove-maps
-  "Returns a (mostly) flattened data structure.
+  "Returns a flattened seq of the given collection.
   Optionally omits any maps that contain the given value."
   ([collection] (remove-maps collection nil))
   ([collection value]
@@ -25,20 +25,21 @@
      (loop [tree (if (and (map? collection)
                           (some #(= % value) (vals collection)))
                    [] collection)
-            elements []]
+            elements ()]
        (if (empty? tree)
-         elements
+         ((comp flatten reverse) elements)
          (recur (rest tree)
-                (conj elements (remove-maps (first tree) value)))))
+                (cons (remove-maps (first tree) value) elements))))
      collection)))
 
 (defn solve
   "Given the input for the day, returns the solution."
   [input]
   (let [data (vector (clojure.data.json/read-str input))
-        total (sum-numbers input)]
+        total (sum-numbers input)
+        total-fn #(reduce + (filter integer? %))]
     [(and (= total
              ; Alternate solution using the function needed for part 2.
-             (reduce + (filter integer? (flatten (remove-maps data nil)))))
+             (total-fn (remove-maps data nil)))
           total)
-     (reduce + (filter integer? (flatten (remove-maps data "red"))))]))
+     (total-fn (remove-maps data "red"))]))
