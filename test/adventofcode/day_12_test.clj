@@ -17,11 +17,12 @@
           \"orange\",\"violet\",\"yellow\"],\"d\":\"green\",\"f\":71}}"))))
 
 (deftest remove-maps-test
-  (is (= 42 (remove-maps 42)))
-  (is (= [:a :b] (remove-maps {:a :b})))
-  (is (= [1 2 3] (remove-maps [1 2 3])))
+  (is (= 42              (remove-maps 42)))
+  (is (= [:a :b]         (remove-maps {:a :b})))
+  (is (= [1 2 3]         (remove-maps [1 2 3])))
   (is (= [1 :a 1 :b 2 3] (remove-maps [1 {:a 1 :b 2} 3])))
-  (is (= [1 3] (remove-maps [1 {:a 1 :b "red"} 3] "red"))))
+  (is (= [1 3]           (remove-maps [1 {:a 1 :b "red"} 3] "red")))
+  (is (= [1 :a 1 :b 3]   (remove-maps [1 {:a 1 :b {:c "red"}} 3] "red"))))
 
 (deftest solve-test
   (testing "part 1"
