@@ -69,5 +69,8 @@
 (defn solve
   "Given the input for the day, returns the solution."
   [input]
-  (let [password (clojure.string/trim-newline input)]
-    [(inc-password password)]))
+  (let [password (clojure.string/trim-newline input)
+        next-password (inc-password password)]
+    [next-password
+     (inc-password
+      (pad-string (count next-password) (inc-string next-password)))]))
