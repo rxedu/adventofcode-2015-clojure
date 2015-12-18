@@ -1,6 +1,8 @@
 (ns adventofcode.day-04
   (:require digest))
 
+(def md5-memo (memoize digest/md5))
+
 (defn positive-numbers
   "Returns a lazy seq of positive numbers: 1, 2, 3,..."
   ([] (positive-numbers 1))
@@ -16,7 +18,7 @@
   Each element is prepended with salt before computing the hash."
   [elements salt n]
   (some
-   #(if (= n (count-leading-zeros (digest/md5 (str salt %)))) %)
+   #(if (= n (count-leading-zeros (md5-memo (str salt %)))) %)
    elements))
 
 (defn solve
