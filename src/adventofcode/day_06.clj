@@ -22,17 +22,14 @@
         lights (map #(Integer. %) (rest matches))]
     [command (take-nth 2 lights) (take-nth 2 (rest lights))]))
 
-(defn init-grid
-  "Returns a lazy n-by-n grid
-  where the value of every element is the given constant."
-  [n constant]
-  (repeat n (repeat n constant)))
-
 (defn transform-grid
   "Applies a seq of instructions with corresponding actions
-  to a grid and returns the transformed grid."
-  [actions grid instructions]
-  (let [agrid (to-array-2d grid)]
+  to an n-by-n grid initialed with the given type
+  (either Boolean/TYPE or Integer/TYPE)
+  and returns the transformed grid."
+  [actions n init-type instructions]
+  (let [aset-fn (if (= init-type Integer/TYPE) aset-int aset)
+        agrid (make-array init-type n n)]
     (dorun
      (for [instruction instructions
            :let [[action rows columns] instruction]]
@@ -40,8 +37,8 @@
         (for [x (range (first rows) (inc (second rows)))]
           (dorun
            (for [y (range (first columns) (inc (second columns)))]
-             (aset agrid x y
-                   ((action actions) (aget agrid x y)))))))))
+             (aset-fn agrid x y
+                      ((action actions) (aget agrid x y)))))))))
     (map (partial into []) (into [] agrid))))
 
 (defn lit-lights
@@ -60,6 +57,6 @@
   (let [instructions
         (map parse-instruction (clojure.string/split-lines input))]
     [(lit-lights
-      (transform-grid actions (init-grid 1000 false) instructions))
+      (transform-grid actions 1000 Boolean/TYPE instructions))
      (brightness
-      (transform-grid brightness-actions (init-grid 1000 0) instructions))]))
+      (transform-grid brightness-actions 1000 Integer/TYPE instructions))]))
