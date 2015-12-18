@@ -16,28 +16,26 @@
   (is (= [[0 0 0] [0 0 0] [0 0 0]]
          (init-grid 3 0))))
 
-(deftest form-grid-test
-  (is (= [[true  true]
-          [false false]]
-         (form-grid 2 (fn [[x y]] (if (= x 0) true false)))))
-  (is (= [[false true]
-          [false true]]
-         (form-grid 2 (fn [[x y]] (if (= y 1) true false)))))
-  (is (= [[false false false]
-          [false false true]
-          [false false false]]
-         (form-grid 3 (fn [[x y]] (if (and (= x 1) (= y 2)) true false))))))
-
 (deftest transform-grid-test
   (let [grid (init-grid 3 false)]
     (is (= [[true  false false]
             [true  false false]
             [false false false]]
-           (transform-grid actions grid [:on [0 1] [0 0]])))
+           (transform-grid actions grid [[:on [0 1] [0 0]]])))
     (is (= [[true  true  true]
             [false false false]
             [false false false]]
-           (transform-grid actions grid [:toggle [0 0] [0 2]])))))
+           (transform-grid actions grid [[:toggle [0 0] [0 2]]]))))
+  (let [grid (init-grid 3 0)]
+    (is (= [[0 0 0]
+            [0 2 0]
+            [0 0 0]]
+           (transform-grid brightness-actions grid [[:toggle [1 1] [1 1]]])))
+    (is (= [[1 1 0]
+            [1 3 2]
+            [1 1 0]]
+           (transform-grid brightness-actions grid [[:on     [0 2] [0 1]]
+                                                    [:toggle [1 1] [1 2]]])))))
 
 (deftest lit-lights-test
   (is (= 0 (lit-lights [[false false] [false false]])))

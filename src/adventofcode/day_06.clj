@@ -28,30 +28,21 @@
   [n constant]
   (repeat n (repeat n constant)))
 
-(defn form-grid
-  "Returns an n-by-n grid where the value at position [x y]
-  is determined by the value of the state function on that position."
-  [n state-fn]
-  (let [grid-size (range n)]
-    (persistent!
-     (reduce
-      (fn [row x] (conj! row (persistent! (reduce
-                                           (fn [column y] (conj! column (state-fn [x y])))
-                                           (transient []) grid-size))))
-      (transient []) grid-size))))
-
 (defn transform-grid
-  "Applies an instruction to a grid and returns the modified grid."
-  [actions grid instruction]
-  (let [action ((first instruction) actions)
-        [xr yr] (rest instruction)]
-    (form-grid
-     (count grid)
-     (fn [[x y]]
-       (let [light (nth (nth grid x) y)]
-         (if (and (<= (first xr) x (last xr))
-                  (<= (first yr) y (last yr)))
-           (action light) light))))))
+  "Applies a seq of instructions with corresponding actions
+  to a grid and returns the transformed grid."
+  [actions grid instructions]
+  (let [agrid (to-array-2d grid)]
+    (dorun
+     (for [instruction instructions
+           :let [[action rows columns] instruction]]
+       (dorun
+        (for [x (range (first rows) (inc (second rows)))]
+          (dorun
+           (for [y (range (first columns) (inc (second columns)))]
+             (aset agrid x y
+                   ((action actions) (aget agrid x y)))))))))
+    (map (partial into []) (into [] agrid))))
 
 (defn lit-lights
   "Counts the total number of lit lights on a grid."
@@ -69,8 +60,6 @@
   (let [instructions
         (map parse-instruction (clojure.string/split-lines input))]
     [(lit-lights
-      (reduce (partial transform-grid actions)
-              (init-grid 1000 false) instructions))
+      (transform-grid actions (init-grid 1000 false) instructions))
      (brightness
-      (reduce (partial transform-grid brightness-actions)
-              (init-grid 1000 0) instructions))]))
+      (transform-grid brightness-actions (init-grid 1000 0) instructions))]))
