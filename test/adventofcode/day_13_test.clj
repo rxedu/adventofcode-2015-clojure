@@ -28,6 +28,10 @@
          (potential-happiness
           {{:a :b} 1 {:a :c} -2 {:b :c} 3 {:b :a} 3 {:c :a} 1 {:c :b} -4}))))
 
+(deftest self-relations-test
+  (is (= {{:self :a} 0 {:self :b} 0 {:a :self} 0 {:b :self} 0}
+         (self-relations [:a :b]))))
+
 (deftest solve-test
   (let [input
         "Alice would gain 54 happiness units by sitting next to Bob.

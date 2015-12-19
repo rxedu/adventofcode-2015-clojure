@@ -39,10 +39,18 @@
             (clojure.math.combinatorics/permutations
              (guests relations)))))
 
+(defn self-relations
+  "Given a list of guests, returns a seq of relations
+  for the completely neutral (zero happiness) guest :self."
+  [guests]
+  (reduce #(into %1 {{:self %2} 0 {%2 :self} 0}) {} guests))
+
 (defn solve
   "Given the input for the day, returns the solution."
   [input]
   (let [relations
         (into {} (map parse-relation
                       (clojure.string/split-lines input)))]
-    [(apply max (potential-happiness relations))]))
+    [(apply max (potential-happiness relations))
+     (apply max (potential-happiness
+                 (into relations (self-relations (guests relations)))))]))
