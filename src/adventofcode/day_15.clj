@@ -46,7 +46,11 @@
   [input]
   (let [ingredients
         (into {} (map parse-ingredient (clojure.string/split-lines input)))
-        types (keys ingredients)]
-    [(reduce (fn [best amounts]
-               (max best (score (cookie ingredients (zipmap types amounts)))))
-             0 (integer-partitions 100 (count types)))]))
+        types (keys ingredients)
+        cookie-fn #(cookie ingredients (zipmap types %))
+        partitions (integer-partitions 100 (count types))]
+    [(reduce #(max %1 (score (cookie-fn %2))) 0 partitions)
+     (reduce (fn [best amounts]
+               (let [cookie (cookie-fn amounts)]
+                 (max best (if (= 500 (:calories cookie)) (score cookie) 0))))
+             0 partitions)]))
