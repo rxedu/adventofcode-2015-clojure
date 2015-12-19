@@ -4,7 +4,7 @@
 (def alph (map char (range 97 123)))
 
 (defn alph-triples
-  "Returns a lazy-seq of strings: (abc, bcd, cde,..., xyz)."
+  "Returns a lazy-seq of strings: abc, bcd, cde,..., xyz."
   ([] (alph-triples 0))
   ([n] (lazy-seq
         (if (= n 24)
@@ -56,7 +56,7 @@
       (recur (conj digits (first alph))))))
 
 (defn inc-password
-  "Returns the input string if it's a valid password,
+  "Returns the input string if it is a valid password,
   otherwise returns the next valid password."
   [password]
   (loop [string password]

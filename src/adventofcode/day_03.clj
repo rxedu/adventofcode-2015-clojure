@@ -9,7 +9,7 @@
 (defn parse-moves
   "Converts a string of moves to a seq of vectors
   according to move-strings, e.g.,
-  >^V< becomes [[1 0], [0 1], [0 -1], [-1 0]]."
+  >^V< becomes [[1 0] [0 1] [0 -1] [-1 0]]."
   [string]
   (replace move-strings (map str (seq string))))
 

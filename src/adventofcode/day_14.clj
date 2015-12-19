@@ -2,7 +2,7 @@
 
 (defn parse-reindeer
   "Converts a reindeer string to a map, e.g.,
-  {:rudolph {:speed 10 :fly 15 :rest 5}}."
+  {:rudolph {:speed 10, :fly 15, :rest 5}}."
   [string]
   (let [matches
         (rest (re-matches #"(\w+)\D+(\d+)\D+(\d+)\D+(\d+)\D+\." string))]
