@@ -49,3 +49,16 @@
       176  vixen 173
       1120 comet 1000
       1056 vixen 1000)))
+
+(deftest points-test
+  (let [reindeer {:comet {:speed 14 :fly 10 :rest 127}
+                  :vixen {:speed 16 :fly 11 :rest 162}}]
+    (are [x r t] (= x (r (points reindeer t)))
+      0   :comet 0
+      0   :vixen 0
+      0   :comet 1
+      1   :vixen 1
+      1   :comet 140
+      139 :vixen 140
+      312 :comet 1000
+      689 :vixen 1000)))
