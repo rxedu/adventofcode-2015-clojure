@@ -12,16 +12,17 @@ Solutions will be posted as I write them,
 but you can use this project to make your own.
 
 Simply clone or fork this, then create a new branch from
-the `unsolved` tag with
+the `new-solutions` tag with
 
 ```
-$ git branch my-solutions unsolved
+$ git branch my-solutions new-solutions
 $ git checkout my-solutions
 ```
-or reset your master branch to the `unsolved` tag with
+
+or reset your master branch to the `new-solutions` tag with
 
 ```
-$ git reset --hard unsolved
+$ git reset --hard new-solutions
 ```
 
 Save your input to `input/01.txt`, `input/02.txt`, etc.
