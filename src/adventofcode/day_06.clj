@@ -1,14 +1,16 @@
 (ns adventofcode.day-06)
 
+(set! *unchecked-math* true)
+
 (def actions
   {:on (constantly true)
    :off (constantly false)
-   :toggle #(not %)})
+   :toggle not})
 
 (def brightness-actions
   {:on inc
-   :off #(max 0 (dec %))
-   :toggle #(+ % 2)})
+   :off #(max 0 (dec ^int %))
+   :toggle (comp inc inc)})
 
 (defn parse-instruction
   "Converts an instruction from a string to a vector,
@@ -35,9 +37,12 @@
   (let [grid-size (range n)]
     (persistent!
      (reduce
-      (fn [row x] (conj! row (persistent! (reduce
-                                           (fn [column y] (conj! column (state-fn [x y])))
-                                           (transient []) grid-size))))
+      (fn [row x]
+        (conj! row (persistent!
+                    (reduce
+                     (fn [column y]
+                       (conj! column (state-fn [x y])))
+                     (transient []) grid-size))))
       (transient []) grid-size))))
 
 (defn transform-grid
@@ -56,7 +61,7 @@
 (defn lit-lights
   "Counts the total number of lit lights on a grid."
   [grid]
-  (or ((comp #(get % true) frequencies flatten) grid) 0))
+  ((comp #(get % true 0) frequencies flatten) grid))
 
 (defn brightness
   "Returns the total brightness of all lights on a grid."
