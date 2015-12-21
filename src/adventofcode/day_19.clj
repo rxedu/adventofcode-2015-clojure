@@ -1,4 +1,5 @@
-(ns adventofcode.day-19)
+(ns adventofcode.day-19
+  (:require [clojure.set]))
 
 (defn parse-replacements
   "Converts a replacement string, e.g., H => HO, to a vector."
