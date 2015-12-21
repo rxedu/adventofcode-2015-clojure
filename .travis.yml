@@ -1,1 +1,11 @@
 language: clojure
+
+before_deploy: lein uberjar
+deploy:
+  provider: releases
+  api_key:
+    secure: BR1KH5VbMWBWHPSNaeuQ7QnoY4cbUpxJgGoe7Hw+OajzWQqlhymY+yDAEP2V5cL7S2nIcMshQJ84XF0PV8OHp2RmrY4TLYUo74OMD+d1m+jBbyMbTDYKC8moNxEz1nr2zpFQw75J7yHL4QkPfOOho9Q8JXxnnUb9RC1+9l3Dmh0IhZxHhFtuurGQnQ2QJRuboxNQXkjy+FMm2QYHsXZTNUXl1Ci3CGMEZwcZqC8mtpp6UqpH+gMwb18NT+JbbXaCbhjU22uMEGLnpJP1pUL/DL2tkbdhzvpWPNY+a9OBYV2RTtmkTnOz7l1xiNaFwg67JKdTXGZ43tLVp/brfjYijdv/8cisqAE5mSCG0Tbu7/JcgEkSFfJCM79GK9ItiySK6pQlmxBwGn0UeSRjbWMlS6QN3+iQFwXGmv8aKLnBFTtk3ihf2GDmT4aJTtk2CnfHi1xQOAQRM9YZ+DVzJKQCkUQidbySrYGpoWYNivrDVF1SespqJE1CzKLMHY/mjFX67LOlVlQkepGF1vtU30St0MD4BAg74h/GEkGqrqUMeQnot6umOnSvmy1EM5S3HhlaES5p8Jq1zm1U2xQmz2OBw7O4ZL4YcguL+s67usAaIiCueAwQ4iJ4Is029IMuT9V/xeAclRfdqFBUFutUldkoyrnJMZZ8x64F+V0v5s2REss=
+  file: target/uberjar/adventofcode-$(echo $TRAVIS_TAG | cut -c 2-)-standalone.jar
+  on:
+    tags: true
+    repo: rxedu/adventofcode
