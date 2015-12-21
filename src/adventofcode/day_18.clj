@@ -7,6 +7,17 @@
   [string]
   (replace {\. false \# true} (seq string)))
 
+(defn in-corner?
+  "Returns true if the point is in a corner of an n-by-n, else false."
+  [n [x y]]
+  (boolean
+   (or (= 0 x y)
+       (= (dec n) x y)
+       (and (= x (dec n)) (= 0 y))
+       (and (= y (dec n)) (= 0 x)))))
+
+(def in-corner?-memo (memoize in-corner?))
+
 (defn nearest-neighbors
   "Returns the nearest neighbors of a point [x y] in an n-by-n grid."
   [n point]
@@ -27,13 +38,21 @@
      (map (fn [[x y]] (nth (nth grid x) y)) neighbors))))
 
 (defn animate-light
-  "Returns the new value of the light at a point on the grid."
+  "Returns the new value of a light at a point on the grid
+  according to the status of it's neighbors."
   [grid [x y :as point]]
   (let [status (nth (nth grid x) y)
         neighbors-on (get (neighbor-status grid point) true 0)]
     (if (or (and (true? status) (< 1 neighbors-on 4))
             (and (false? status) (= 3 neighbors-on)))
       true false)))
+
+(defn light-corners
+  "Returns the new value of a light at a point on the grid:
+  all corner lights are turned on, all others are unchanged."
+  [grid [x y :as point]]
+  (if (in-corner?-memo (count grid) point)
+    true (nth (nth grid x) y)))
 
 (defn step-grid
   "Returns a new grid where the value at each point
@@ -55,7 +74,10 @@
   "Given the input for the day, returns the solution."
   [input]
   (let [grid (map parse-lights
-                  (clojure.string/split-lines input))]
-    [((comp #(get % true) frequencies flatten)
-      (reduce #(step-grid animate-light %1 #_%2)
-              grid (range 100)))]))
+                  (clojure.string/split-lines input))
+        num-on (comp #(get % true) frequencies flatten)]
+    [(num-on (reduce #(step-grid animate-light %1 #_%2)
+                     grid (range 100)))
+     (num-on (reduce #(step-grid light-corners
+                                 (step-grid animate-light %1) #_%2)
+                     (step-grid light-corners grid) (range 100)))]))

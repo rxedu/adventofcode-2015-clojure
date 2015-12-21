@@ -8,6 +8,13 @@
   (is (= [true false true true true false false]
          (parse-lights "#.###.."))))
 
+(deftest in-corner?-test
+  (is (false? (in-corner? 100 [34 52])))
+  (is (true?  (in-corner? 100 [0 0])))
+  (is (true?  (in-corner? 100 [0 99])))
+  (is (true?  (in-corner? 100 [99 0])))
+  (is (true?  (in-corner? 100 [99 99]))))
+
 (deftest nearest-neighbors-test
   (is (= [[0 1] [1 0] [1 1]] (nearest-neighbors 10 [0 0])))
   (is (= [[9 8] [8 9] [8 8]] (nearest-neighbors 10 [9 9])))
@@ -38,6 +45,18 @@
     (is (false? (animate-light grid [2 1])))
     (is (false? (animate-light grid [1 3])))
     (is (false? (animate-light grid [3 3])))))
+
+(deftest light-corners-test
+  (let [grid [[true  true  true  false]
+              [false false true  true]
+              [true  true  false false]
+              [false true  false true]]]
+    (is (true?  (light-corners grid [0 0])))
+    (is (true?  (light-corners grid [3 0])))
+    (is (true?  (light-corners grid [0 3])))
+    (is (true?  (light-corners grid [3 3])))
+    (is (true?  (light-corners grid [2 0])))
+    (is (false? (light-corners grid [3 2])))))
 
 (deftest step-grid-test
   (is (= [[false true  true  false]
