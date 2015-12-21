@@ -2,10 +2,10 @@
   (:require [clojure.test :refer :all]
             [adventofcode.day-20 :refer :all]))
 
-(deftest elf-houses-test
-  (is (= [1 2 3 4 5]   (take 5 (elf-houses 1))))
-  (is (= [2 4 6 8 10]  (take 5 (elf-houses 2))))
-  (is (= [3 6 9 12 15] (take 5 (elf-houses 3)))))
+; (deftest elf-houses-test
+;   (is (= [1 2 3 4 5]   (take 5 (elf-houses 1))))
+;   (is (= [2 4 6 8 10]  (take 5 (elf-houses 2))))
+;   (is (= [3 6 9 12 15] (take 5 (elf-houses 3)))))
 
 (deftest visited?-test
   (are [b i n] (is (b (visited? i n)))
