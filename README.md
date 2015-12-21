@@ -42,7 +42,14 @@ If you just want to generate solutions you will need Java.
 3. Generate the solutions to `solutions` with
 
    ```
-   $ java -jar adventofcode.jar
+   $ java -jar adventofcode-1.0.0-standalone.jar
+   ```
+
+   Or compute the solution for a particular day,
+   e.g., day 3, with
+
+   ```
+   $ java -jar adventofcode-1.0.0-standalone.jar 3
    ```
 
 [release]: https://github.com/razor-x/adventofcode/releases
