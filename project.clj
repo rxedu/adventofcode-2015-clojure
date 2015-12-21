@@ -1,4 +1,4 @@
-(defproject adventofcode "0.1.0"
+(defproject adventofcode "1.0.0"
   :description "Solutions to the Advent of Code puzzles."
   :url "https://github.com/rxedu/adventofcode"
   :license {:name "MIT"
