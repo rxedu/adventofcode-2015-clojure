@@ -36,7 +36,8 @@ See [Development](#development) below for more.
 
 If you just want to generate solutions you will need Java.
 
-1. Download `adventofcode.jar` from the latest [release].
+1. Download `adventofcode-1.0.0-standalone.jar`
+   from the latest [release].
 2. In the same folder, save your input to an `input` directory
    (just like the `input` directory included in the project).
 3. Generate the solutions to `solutions` with
