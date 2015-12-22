@@ -13,7 +13,7 @@
   (is (true?  (compare-sue {:a 1 :b 2 :c 3} {:a 1 :b 2 :d 3})))
   (is (true?  (compare-sue {:a 1 :b 2 :d 3} {:a 1 :b 2 :c 3}))))
 
-(deftest compare-sue-test
+(deftest compare-real-sue-test
   (is (false? (compare-real-sue {:goldfish 4 :c 3} {:goldfish 5 :c 3})))
   (is (false? (compare-real-sue {:goldfish 4 :c 3} {:goldfish 4 :c 3})))
   (is (true?  (compare-real-sue {:goldfish 4 :c 3} {:goldfish 3 :c 3})))
