@@ -52,7 +52,7 @@ If you just want to generate solutions you will need Java.
    $ java -jar adventofcode-1.0.0-standalone.jar 3
    ```
 
-[release]: https://github.com/razor-x/adventofcode/releases
+[release]: https://github.com/rxedu/adventofcode/releases
 
 ## Development
 
