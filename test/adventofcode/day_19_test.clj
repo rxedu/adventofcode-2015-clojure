@@ -39,5 +39,5 @@
 (deftest fabrication-steps-test
   (let [replacements
         [["e" "H"] ["e" "O"] ["H" "HO"] ["H" "OH"] ["O" "HH"] ["P" "EEA"]]]
-    (is (= [3 "e"]  (fabrication-steps replacements "HOH")))
-    (is (= [6 "ee"] (fabrication-steps replacements "HOHOHO")))))
+    (is (= 3 (fabrication-steps replacements "HOH")))
+    (is (= 6 (fabrication-steps replacements "HOHOHO")))))
