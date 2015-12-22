@@ -19,9 +19,10 @@
           {{:a :b} 1 {:a :c} -2 {:b :c} 3 {:b :a} 3 {:c :a} 1 {:c :b} 4}))))
 
 (deftest happiness-test
-  (is (= -18 (happiness
-              {{:a :b} 10 {:a :c} -20 {:b :c} 32 {:b :a} -44 {:c :a} 8 {:c :b} -4}
-              [:b :a :c]))))
+  (is (= -18
+         (happiness
+          {{:a :b} 10 {:a :c} -20 {:b :c} 32 {:b :a} -44 {:c :a} 8 {:c :b} -4}
+          [:b :a :c]))))
 
 (deftest potential-happiness-test
   (is (= #{2}
