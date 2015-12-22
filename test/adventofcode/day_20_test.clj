@@ -23,5 +23,5 @@
 
 (deftest solve-test
   (testing "part 1"
-    (is (= 8 (first (solve "125"))))
+    (is (= 8 (first (solve "130"))))
     (is (= 48 (first (solve "1000"))))))
