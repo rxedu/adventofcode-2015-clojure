@@ -3,7 +3,7 @@
             [adventofcode.core :refer :all]))
 
 (deftest solve-day-test
-  (are [n out] (= out (solve-day n))
+  (are [n out] (= out (time (solve-day n)))
     1  [232 1783]
     2  [1606483 3842356]
     3  [2572 2631]
