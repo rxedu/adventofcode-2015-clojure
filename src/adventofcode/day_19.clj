@@ -29,6 +29,30 @@
             ((comp range count (partial re-seq (re-pattern match)))
              string))))
 
+(defn fabrication-steps
+  "Given a seq of replacements and a molecule,
+  returns the number of steps needed to fabricate it from e."
+  [replacements molecule]
+  (reduce
+   (fn [[n mol] rep]
+     (if (= (first mol) \e)
+       (reduced [n mol])
+       (reduce
+        (fn [[m s] [match replacement]]
+          (let [re (re-pattern match)]
+            (if (nil? (re-find re s))
+              (reduced [m s])
+              [(inc m)
+               (clojure.string/replace-first s re replacement)])))
+        [n mol]
+        (repeat rep))))
+   [0 molecule]
+   (apply concat
+          (repeat
+           (sort-by first
+                    #(compare (count %2) (count %1))
+                    (map reverse replacements))))))
+
 (defn solve
   "Given the input for the day, returns the solution."
   [input]
@@ -39,4 +63,5 @@
       (reduce
        #(clojure.set/union
          %1 (apply (partial distinct-replacements molecule) %2))
-       #{} replacements))]))
+       #{} replacements))
+     (fabrication-steps replacements molecule)]))

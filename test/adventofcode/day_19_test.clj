@@ -36,7 +36,8 @@
   (is (= #{"HHHHOHO" "HOHHHHO" "HOHOHHH"}
          (distinct-replacements "HOHOHO" "O" "HH"))))
 
-(deftest solve-test
-  (testing "part 1"
-    (is (= 4 (first (solve "H => HO\nH => OH\nO => HH\n\nHOH"))))
-    (is (= 7 (first (solve "H => HO\nH => OH\nO => HH\n\nHOHOHO"))))))
+(deftest fabrication-steps-test
+  (let [replacements
+        [["e" "H"] ["e" "O"] ["H" "HO"] ["H" "OH"] ["O" "HH"] ["P" "EEA"]]]
+    (is (= [3 "e"]  (fabrication-steps replacements "HOH")))
+    (is (= [6 "ee"] (fabrication-steps replacements "HOHOHO")))))
