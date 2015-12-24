@@ -41,17 +41,19 @@
 
 (defn run-program
   "Runs a program of instructions."
-  [instructions]
-  (reduce
-   (fn [{:keys [idx] :as state} ins]
-     (if (not (< -1 idx (count ins)))
-       (reduced state)
-       (let [instruction (first (vec (nth ins idx)))
-             i (first instruction)
-             args (second instruction)]
-         ((i instruction-fns) state args))))
-   {:idx 0 :a 0 :b 0}
-   (repeat instructions)))
+  ([instructions]
+   (run-program instructions {:idx 0 :a 0 :b 0}))
+  ([instructions init]
+   (reduce
+    (fn [{:keys [idx] :as state} ins]
+      (if (not (< -1 idx (count ins)))
+        (reduced state)
+        (let [instruction (first (vec (nth ins idx)))
+              i (first instruction)
+              args (second instruction)]
+          ((i instruction-fns) state args))))
+    init
+    (repeat instructions))))
 
 (defn solve
   "Given the input for the day, returns the solution."
@@ -59,4 +61,5 @@
   (let [instructions
         (map parse-instruction (clojure.string/split-lines input))]
     (println instructions)
-    [(:b (run-program instructions))]))
+    [(:b (run-program instructions))
+     (:b (run-program instructions {:idx 0 :a 1 :b 0}))]))
