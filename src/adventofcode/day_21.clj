@@ -64,6 +64,9 @@
   [input]
   (let [boss (parse-boss input)
         winners
-        (remove nil? (map #(if (win? {:you %1 :boss %2}) %1 nil)
-                          characters (repeat boss)))]
-    [(apply min (map :cost  winners))]))
+        (fn [winner?]
+          (remove nil? (map
+                        #(if (winner? (win? {:you %1 :boss %2})) %1 nil)
+                        characters (repeat boss))))]
+    [(apply min (map :cost (winners true?)))
+     (apply max (map :cost (winners false?)))]))
