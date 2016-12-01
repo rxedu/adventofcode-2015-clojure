@@ -7,4 +7,4 @@ This change log follows the conventions of [keepachangelog.com].
 
 ## [Unreleased][Unreleased]
 
-[Unreleased]: https://github.com/rxedu/adventofcode/compare/0.0.0...HEAD
+[Unreleased]: https://github.com/rxedu/adventofcode-2015/compare/0.0.0...HEAD
