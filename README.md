@@ -2,7 +2,7 @@
 
 [![GitHub release](https://img.shields.io/github/release/rxedu/adventofcode-2015.svg)](https://github.com/rxedu/adventofcode-2015/releases)
 [![GitHub license](https://img.shields.io/github/license/rxedu/adventofcode-2015.svg)](./LICENSE.txt)
-[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)](https://travis-ci.org/rxedu/adventofcode-2015)
+[![Travis](https://img.shields.io/travis/rxedu/adventofcode-2015.svg)](https://travis-ci.org/rxedu/adventofcode-2015)
 
 My solutions to the [Advent of Code] puzzles.
 
