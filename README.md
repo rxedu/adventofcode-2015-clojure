@@ -1,10 +1,10 @@
-# Advent of Code Solutions (in Clojure)
+# Advent of Code 2015 Solutions (in Clojure)
 
 [![GitHub release](https://img.shields.io/github/release/rxedu/adventofcode-2015.svg)](https://github.com/rxedu/adventofcode-2015/releases)
 [![GitHub license](https://img.shields.io/github/license/rxedu/adventofcode-2015.svg)](./LICENSE.txt)
 [![Travis](https://img.shields.io/travis/rxedu/adventofcode-2015.svg)](https://travis-ci.org/rxedu/adventofcode-2015)
 
-My solutions to the [Advent of Code] puzzles.
+My solutions to the [Advent of Code 2015] puzzles.
 
 ## Write your own!
 
@@ -30,7 +30,7 @@ Then, write your solution and tests for each day
 in the corresponding `.clj` files.
 See [Development](#development) below for more.
 
-[Advent of Code]: http://adventofcode.com/
+[Advent of Code 2015]: http://adventofcode.com/2015
 
 ## Usage
 
