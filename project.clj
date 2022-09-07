@@ -1,6 +1,6 @@
 (defproject adventofcode "1.0.0"
   :description "Solutions to the Advent of Code puzzles."
-  :url "https://github.com/rxedu/adventofcode-2015"
+  :url "https://github.com/rxedu/adventofcode-2015-clojure"
   :license {:name "MIT"
             :url "https://opensource.org/licenses/MIT"}
   :dependencies [[org.clojure/clojure "1.8.0"]

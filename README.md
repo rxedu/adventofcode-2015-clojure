@@ -1,8 +1,8 @@
 # Advent of Code 2015 Solutions (in Clojure)
 
-[![GitHub release](https://img.shields.io/github/release/rxedu/adventofcode-2015.svg)](https://github.com/rxedu/adventofcode-2015/releases)
-[![GitHub license](https://img.shields.io/github/license/rxedu/adventofcode-2015.svg)](./LICENSE.txt)
-[![Travis](https://img.shields.io/travis/rxedu/adventofcode-2015.svg)](https://travis-ci.org/rxedu/adventofcode-2015)
+[![GitHub release](https://img.shields.io/github/release/rxedu/adventofcode-2015-clojure.svg)](https://github.com/rxedu/adventofcode-2015-clojure/releases)
+[![GitHub license](https://img.shields.io/github/license/rxedu/adventofcode-2015-clojure.svg)](./LICENSE.txt)
+[![Travis](https://img.shields.io/travis/rxedu/adventofcode-2015-clojure.svg)](https://travis-ci.org/rxedu/adventofcode-2015-clojure)
 
 My solutions to the [Advent of Code 2015] puzzles.
 
@@ -53,7 +53,7 @@ If you just want to generate solutions you will need Java.
    $ java -jar adventofcode-1.0.0-standalone.jar 3
    ```
 
-[release]: https://github.com/rxedu/adventofcode-2015/releases
+[release]: https://github.com/rxedu/adventofcode-2015-clojure/releases
 
 ## Development
 

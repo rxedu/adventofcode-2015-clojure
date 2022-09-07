@@ -8,4 +8,4 @@ deploy:
   file: target/uberjar/adventofcode-$(echo $TRAVIS_TAG | cut -c 2-)-standalone.jar
   on:
     tags: true
-    repo: rxedu/adventofcode-2015
+    repo: rxedu/adventofcode-2015-clojure
